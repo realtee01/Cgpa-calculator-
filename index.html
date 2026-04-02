@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal | CGPA Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 min-h-screen">
+
+    <div class="max-w-4xl mx-auto py-12 px-4">
+        <div class="text-center mb-10">
+            <h1 class="text-3xl font-bold text-gray-800">Academic CGPA Calculator</h1>
+            <p class="text-gray-500 mt-2">Manage and calculate your semester performance</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h2 class="text-lg font-semibold mb-4 border-b pb-2">Add Courses</h2>
+                
+                <div id="course-list" class="space-y-4 mb-6">
+                    </div>
+
+                <div class="flex gap-3">
+                    <button id="add-course" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition">
+                        + Add Course
+                    </button>
+                    <button id="calculate-btn" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                        Calculate CGPA
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-fit sticky top-6">
+                <h2 class="text-lg font-semibold mb-4 border-b pb-2">Summary</h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Total Units:</span>
+                        <span id="total-units" class="font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between text-xl pt-4 border-t">
+                        <span class="font-semibold text-gray-800">GPA:</span>
+                        <span id="final-gpa" class="font-bold text-indigo-600">0.00</span>
+                    </div>
+                    <div class="mt-4 p-3 bg-indigo-50 rounded-lg">
+                        <p class="text-xs text-indigo-700 font-medium uppercase tracking-wider">Classification</p>
+                        <p id="classification" class="text-sm text-indigo-900 font-semibold mt-1">N/A</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
