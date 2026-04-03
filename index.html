@@ -1,24 +1,143 @@
-    <header class="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 sticky top-0 z-30 transition-colors">
-        <div class="flex justify-between items-start mb-4">
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>T/A | CGPA Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+        input[type="number"]::-webkit-inner-spin-button { display: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .ta-logo-svg { height: 60px; width: 60px; filter: drop-shadow(0 4px 6px rgba(79, 70, 229, 0.3)); }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-100 flex flex-col md:flex-row overflow-x-hidden transition-colors duration-300">
+
+    <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-indigo-600 dark:bg-slate-950 px-6 transition-all duration-500">
+        <div class="bg-white dark:bg-slate-900 p-10 md:p-16 rounded-[2.5rem] shadow-2xl max-w-lg w-full text-center border border-slate-100 dark:border-slate-800 relative fade-in">
+            
+            <button id="login-theme-toggle" class="absolute top-6 right-6 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500">
+                <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
+            </button>
+
+            <svg class="ta-logo-svg mx-auto mb-6" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M45 15L15 45H75L45 15Z" fill="#4F46E5"/><rect x="15" y="55" width="20" height="30" fill="#4F46E5"/><rect x="45" y="55" width="40" height="10" fill="#4F46E5"/><rect x="75" y="75" width="10" height="10" fill="#4F46E5"/><rect x="45" y="75" width="20" height="10" fill="#4F46E5"/>
+            </svg>
+
+            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-2 tracking-tight">T/A | CGPA Calculator</h2>
+            <p class="text-slate-500 dark:text-slate-400 mb-10 text-lg">Enter your name to access your academic workspace.</p>
+            
+            <input type="text" id="name-input" placeholder="Full Name" class="w-full p-5 rounded-2xl border-2 border-slate-50 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 dark:text-white mb-6 focus:border-indigo-600 outline-none text-center font-bold text-xl">
+            
+            <button id="enter-portal" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-5 rounded-2xl shadow-xl transition-all active:scale-[0.97] text-lg">
+                Enter My Portal
+            </button>
+        </div>
+    </div>
+
+    <header class="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-5 sticky top-0 z-30 transition-colors">
+        <div class="flex justify-between items-start mb-5">
             <div>
-                <span class="font-black text-indigo-600 text-lg tracking-tighter">T/A PORTAL</span>
+                <span class="font-black text-indigo-600 text-xl tracking-tighter uppercase">T/A Portal</span>
                 <div class="mt-1">
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Welcome,</p>
-                    <p id="display-name-mobile" class="text-lg font-extrabold text-slate-800 dark:text-white truncate max-w-[200px]">Student</p>
+                    <p id="display-name-mobile" class="text-lg font-extrabold text-slate-800 dark:text-white truncate max-w-[180px]">Student</p>
                 </div>
             </div>
-            <button id="mobile-theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500">
+            <button id="mobile-theme-toggle" class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500">
                 <span class="dark:hidden text-lg">🌙</span><span class="hidden dark:block text-lg">☀️</span>
             </button>
         </div>
         <div class="flex gap-3">
-            <div class="flex-1 bg-indigo-600 p-4 rounded-2xl text-white shadow-lg shadow-indigo-500/20">
-                <p class="text-[10px] font-bold uppercase opacity-80 mb-0.5">Current CGPA</p>
-                <p id="final-gpa-mobile" class="text-2xl font-black">0.00</p>
+            <div class="flex-1 bg-indigo-600 p-4 rounded-3xl text-white shadow-lg shadow-indigo-500/20">
+                <p class="text-[10px] font-bold uppercase opacity-80 mb-1">Current CGPA</p>
+                <p id="final-gpa-mobile" class="text-3xl font-black">0.00</p>
             </div>
-            <div class="flex-1 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
-                <p class="text-[10px] font-bold uppercase text-slate-400 mb-0.5">Credit Units</p>
-                <p id="total-units-mobile" class="text-2xl font-black">0</p>
+            <div class="flex-1 bg-white dark:bg-slate-800 p-4 rounded-3xl border border-slate-200 dark:border-slate-700">
+                <p class="text-[10px] font-bold uppercase text-slate-400 mb-1">Total Units</p>
+                <p id="total-units-mobile" class="text-3xl font-black">0</p>
             </div>
         </div>
     </header>
+
+    <aside class="hidden md:flex w-80 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-8 flex-col h-screen sticky top-0 z-40 transition-colors">
+        <div class="flex items-center justify-between mb-10">
+            <span class="font-black text-indigo-600 text-xl tracking-tighter uppercase">T/A Portal</span>
+            <button id="main-theme-toggle" class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
+            </button>
+        </div>
+
+        <div class="flex-1 space-y-8">
+            <div>
+                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Welcome,</p>
+                <p id="display-name" class="text-2xl font-extrabold text-slate-800 dark:text-white truncate">Student</p>
+            </div>
+            
+            <div class="bg-indigo-600 rounded-[2.5rem] p-8 text-white shadow-xl shadow-indigo-500/20">
+                <p class="text-indigo-100 text-xs font-bold uppercase mb-2 tracking-wider">Cumulative GPA</p>
+                <div class="flex items-baseline gap-1">
+                    <span id="final-gpa" class="text-6xl font-black tracking-tighter">0.00</span>
+                    <span class="text-indigo-200 text-sm font-medium">/ 5.0</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-100 dark:border-slate-800">
+                <p class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase mb-1">Total Credit Units</p>
+                <p id="total-units" class="text-2xl font-black text-slate-800 dark:text-white">0</p>
+            </div>
+        </div>
+
+        <button id="calculate-btn-desktop" class="mt-8 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-5 rounded-2xl shadow-xl transition-all active:scale-95">
+            Calculate Scores
+        </button>
+    </aside>
+
+    <main id="main-app" class="hidden flex-1 p-5 md:p-12 overflow-y-auto">
+        <div class="max-w-4xl mx-auto fade-in">
+            
+            <div class="flex items-center justify-between mb-8 md:mb-12">
+                <div>
+                    <h2 class="text-xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Semester Courses</h2>
+                    <p class="hidden md:block text-slate-500 text-sm mt-1 font-medium">Input your units and grades to track performance.</p>
+                </div>
+                <button id="add-course" class="bg-indigo-600 md:bg-white md:dark:bg-slate-800 text-white md:text-indigo-600 font-bold py-2.5 px-6 md:px-8 rounded-xl md:border md:border-indigo-100 dark:border-slate-700 shadow-sm transition-all active:scale-95">
+                    + Add Row
+                </button>
+            </div>
+
+            <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <div class="overflow-x-auto no-scrollbar">
+                    <table class="w-full text-left min-w-[320px]">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+                            <tr class="text-[10px] uppercase font-black tracking-widest text-slate-400">
+                                <th class="px-6 py-5">Course Code</th>
+                                <th class="px-2 py-5 text-center">Unit</th>
+                                <th class="px-2 py-5 text-center">Grade</th>
+                                <th class="px-6 py-5 w-10"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="course-list" class="divide-y divide-slate-50 dark:divide-slate-800 transition-all">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <button id="calculate-btn-mobile" class="md:hidden w-full bg-indigo-600 text-white font-black py-5 rounded-2xl shadow-xl shadow-indigo-500/20 mt-8 active:scale-[0.98]">
+                Calculate Final GPA
+            </button>
+            
+            <p class="text-center text-slate-400 text-xs mt-10 md:mt-16 font-medium italic">
+                Data is stored locally in your browser. All rights reserved.
+            </p>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
