@@ -1,158 +1,105 @@
-<!DOCTYPE html>
-<html lang="en" class="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>T/A | Premium CGPA Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class' }</script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            -webkit-tap-highlight-color: transparent;
-            background: radial-gradient(at top left, #f8fafc, #f1f5f9);
+document.addEventListener('DOMContentLoaded', () => {
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const mainApp = document.getElementById('main-app');
+    const nameInput = document.getElementById('name-input');
+    const enterBtn = document.getElementById('enter-portal');
+
+    // Access Logic
+    function login(name) {
+        if (name.trim() !== "") {
+            localStorage.setItem('student-name', name);
+            
+            // Sync names across all displays
+            const nameDisplays = [
+                document.getElementById('display-name'),
+                document.getElementById('display-name-mobile')
+            ];
+            nameDisplays.forEach(el => { if (el) el.innerText = name; });
+            
+            // Premium exit animation
+            welcomeScreen.style.opacity = '0';
+            welcomeScreen.style.pointerEvents = 'none';
+            setTimeout(() => {
+                welcomeScreen.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+            }, 600);
         }
-        .dark body {
-            background: radial-gradient(at top left, #0f172a, #020617);
+    }
+
+    const savedName = localStorage.getItem('student-name');
+    if (savedName) login(savedName);
+
+    enterBtn.addEventListener('click', () => login(nameInput.value));
+    nameInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') login(nameInput.value); });
+
+    // Theme Management
+    const themeToggles = [
+        document.getElementById('main-theme-toggle'),
+        document.getElementById('mobile-theme-toggle'),
+        document.getElementById('login-theme-toggle')
+    ];
+
+    themeToggles.forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            });
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .dark .glass-card {
-            background: rgba(15, 23, 42, 0.6);
-        }
-        input[type="number"]::-webkit-inner-spin-button { display: none; }
-        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
-</head>
-<body class="min-h-screen text-slate-900 dark:text-slate-100 flex flex-col md:flex-row overflow-x-hidden transition-colors duration-500">
+    });
 
-    <div id="welcome-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-indigo-600 dark:bg-slate-950 px-6 transition-all duration-700">
-        <div class="bg-white dark:bg-slate-900 p-10 md:p-16 rounded-[3rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.2)] max-w-lg w-full text-center border border-white/20 relative fade-in">
-            
-            <button id="login-theme-toggle" class="absolute top-8 right-8 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-500 hover:scale-110 transition-transform">
-                <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
-            </button>
+    if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
 
-            <div class="w-20 h-20 bg-indigo-50 dark:bg-indigo-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-inner">
-                <span class="text-3xl font-black text-indigo-600 tracking-tighter">T/A</span>
-            </div>
+    // Calculator Core Logic
+    const courseList = document.getElementById('course-list');
+    const addBtn = document.getElementById('add-course');
 
-            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight">Academic Portal</h2>
-            <p class="text-slate-500 dark:text-slate-400 mb-10 text-lg font-medium">Elevate your academic tracking experience.</p>
-            
-            <input type="text" id="name-input" placeholder="Full Name" class="w-full p-5 rounded-2xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 dark:text-white mb-6 focus:border-indigo-600 focus:bg-white dark:focus:bg-slate-800 outline-none text-center font-bold text-xl transition-all placeholder:text-slate-300">
-            
-            <button id="enter-portal" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-2xl shadow-xl shadow-indigo-500/40 transition-all active:scale-[0.96] text-lg tracking-tight">
-                Get Started
-            </button>
-        </div>
-    </div>
-
-    <header class="md:hidden glass-card border-b border-slate-200 dark:border-slate-800 p-6 sticky top-0 z-30 transition-all">
-        <div class="flex justify-between items-center mb-6">
-            <span class="font-black text-indigo-600 text-xl tracking-tighter">T/A</span>
-            <button id="mobile-theme-toggle" class="p-2.5 rounded-xl bg-slate-100/50 dark:bg-slate-800/50">
-                <span class="dark:hidden text-lg">🌙</span><span class="hidden dark:block text-lg">☀️</span>
-            </button>
-        </div>
-        <div class="mb-5">
-            <p class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-[0.2em] mb-1">Authenticated Student</p>
-            <p id="display-name-mobile" class="text-2xl font-black text-slate-900 dark:text-white truncate">Student</p>
-        </div>
-        <div class="flex gap-4">
-            <div class="flex-1 bg-indigo-600 p-5 rounded-[2rem] text-white shadow-lg shadow-indigo-500/30">
-                <p class="text-[10px] font-bold uppercase opacity-70 mb-1 tracking-widest">CGPA</p>
-                <p id="final-gpa-mobile" class="text-3xl font-black tracking-tighter">0.00</p>
-            </div>
-            <div class="flex-1 glass-card p-5 rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-sm">
-                <p class="text-[10px] font-bold uppercase text-slate-400 mb-1 tracking-widest">Units</p>
-                <p id="total-units-mobile" class="text-3xl font-black tracking-tighter text-slate-800 dark:text-white">0</p>
-            </div>
-        </div>
-    </header>
-
-    <aside class="hidden md:flex w-96 glass-card border-r border-slate-200 dark:border-slate-800 p-10 flex-col h-screen sticky top-0 z-40 transition-all">
-        <div class="flex items-center justify-between mb-12">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-black text-white text-sm">T/A</div>
-                <span class="font-black text-slate-900 dark:text-white text-xl tracking-tighter">PORTAL</span>
-            </div>
-            <button id="main-theme-toggle" class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-500 hover:rotate-12 transition-transform">
-                <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
-            </button>
-        </div>
-
-        <div class="flex-1 space-y-10">
-            <div>
-                <p class="text-indigo-500 text-[10px] font-extrabold uppercase tracking-[0.3em] mb-2">Student Account</p>
-                <p id="display-name" class="text-3xl font-black text-slate-900 dark:text-white leading-none">Student</p>
-            </div>
-            
-            <div class="bg-indigo-600 rounded-[3rem] p-10 text-white shadow-2xl shadow-indigo-500/40 relative overflow-hidden">
-                <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
-                <p class="text-indigo-100 text-[10px] font-black uppercase mb-3 tracking-[0.2em]">Live Cumulative GPA</p>
-                <div class="flex items-baseline gap-2">
-                    <span id="final-gpa" class="text-7xl font-black tracking-tighter">0.00</span>
-                    <span class="text-indigo-200 text-lg font-bold">/ 5.0</span>
-                </div>
-            </div>
-
-            <div class="glass-card p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-700 shadow-sm">
-                <p class="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase mb-2 tracking-[0.2em]">Credit Achievement</p>
-                <p id="total-units" class="text-3xl font-black text-slate-800 dark:text-white tracking-tighter">0 <span class="text-sm font-bold text-slate-400 ml-1">UNITS</span></p>
-            </div>
-        </div>
-
-        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight">
-            Refresh Analysis
-        </button>
-    </aside>
-
-    <main id="main-app" class="hidden flex-1 p-6 md:p-16 overflow-y-auto">
-        <div class="max-w-4xl mx-auto fade-in">
-            
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-12">
-                <div>
-                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Course Registry</h2>
-                    <p class="text-slate-500 font-medium mt-2">Add your semester modules below to generate your report.</p>
-                </div>
-                <button id="add-course" class="w-full sm:w-auto bg-white dark:bg-slate-800 hover:bg-slate-50 text-indigo-600 dark:text-indigo-400 font-black py-4 px-10 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm transition-all active:scale-95">
-                    + Add Course
+    function createRow() {
+        const tr = document.createElement('tr');
+        tr.className = 'group transition-all hover:bg-indigo-50/30 dark:hover:bg-indigo-500/5';
+        tr.innerHTML = `
+            <td class="px-8 py-6">
+                <input type="text" placeholder="e.g. GST 101" class="w-full bg-transparent outline-none text-slate-700 dark:text-slate-200 font-bold placeholder:text-slate-300 text-base">
+            </td>
+            <td class="px-4 py-6">
+                <input type="number" placeholder="0" class="unit-input w-16 mx-auto block bg-slate-50 dark:bg-slate-800 rounded-2xl p-3 text-center font-black text-indigo-600 dark:text-indigo-400 outline-none transition-all focus:ring-2 focus:ring-indigo-500/20">
+            </td>
+            <td class="px-4 py-6">
+                <select class="grade-input w-20 mx-auto block bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-2xl p-3 font-black outline-none cursor-pointer hover:border-indigo-400 transition-all text-center appearance-none">
+                    <option value="5">A</option><option value="4">B</option><option value="3">C</option><option value="2">D</option><option value="1">E</option><option value="0">F</option>
+                </select>
+            </td>
+            <td class="px-8 py-6 text-right">
+                <button onclick="this.closest('tr').remove()" class="text-slate-300 hover:text-red-500 transition-all transform hover:scale-110 active:scale-75">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                 </button>
-            </div>
+            </td>
+        `;
+        courseList.appendChild(tr);
+    }
 
-            <div class="glass-card rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200 dark:border-slate-800 overflow-hidden">
-                <div class="overflow-x-auto no-scrollbar">
-                    <table class="w-full text-left min-w-[500px]">
-                        <thead class="bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800">
-                            <tr class="text-[10px] uppercase font-black tracking-[0.2em] text-slate-400">
-                                <th class="px-8 py-6">Course Module</th>
-                                <th class="px-4 py-6 text-center">Units</th>
-                                <th class="px-4 py-6 text-center">Grade</th>
-                                <th class="px-8 py-6 w-20 text-right">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="course-list" class="divide-y divide-slate-100 dark:divide-slate-800 transition-all">
-                            </tbody>
-                    </table>
-                </div>
-            </div>
+    for (let i = 0; i < 4; i++) createRow();
+    addBtn.addEventListener('click', createRow);
 
-            <button id="calculate-btn-mobile" class="md:hidden w-full bg-indigo-600 text-white font-black py-5 rounded-[2rem] shadow-2xl shadow-indigo-500/40 mt-10 active:scale-[0.98] tracking-tight">
-                Update Performance
-            </button>
-            
-            <footer class="mt-20 text-center">
-                <p class="text-slate-300 dark:text-slate-600 text-[10px] font-bold uppercase tracking-[0.3em]">T/A Academic Engine v2.0</p>
-            </footer>
-        </div>
-    </main>
+    const performUpdate = () => {
+        const units = document.querySelectorAll('.unit-input');
+        const grades = document.querySelectorAll('.grade-input');
+        let totalU = 0, totalP = 0;
 
-    <script src="script.js"></script>
-</body>
-</html>
+        units.forEach((input, i) => {
+            const u = parseFloat(input.value) || 0;
+            const g = parseFloat(grades[i].value) || 0;
+            totalU += u; totalP += (u * g);
+        });
+
+        const gpa = totalU > 0 ? (totalP / totalU).toFixed(2) : "0.00";
+        
+        // Sync stats across Mobile and Desktop
+        document.querySelectorAll('#final-gpa, #final-gpa-mobile').forEach(el => el.innerText = gpa);
+        document.querySelectorAll('#total-units, #total-units-mobile').forEach(el => el.innerText = totalU);
+    };
+
+    [document.getElementById('calculate-btn-desktop'), document.getElementById('calculate-btn-mobile')].forEach(btn => {
+        if (btn) btn.addEventListener('click', performUpdate);
+    });
+});
