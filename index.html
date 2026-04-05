@@ -3,22 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>T/A | Premium CGPA Portal</title>
+    <title>T/A | Modern CGPA Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; background: #f8fafc; }
         .dark body { background: #020617; }
+        
+        /* Glassmorphism for Dashboard Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .dark .glass-card { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
 
-        /* FIXED: Using direct Unsplash Source Link */
+        /* NEW PREMIUM GLASSMORPHISM FOR LOGIN CARD */
+        .modern-login-glass {
+            background: rgba(255, 255, 255, 0.2); /* Low opacity for transparency */
+            backdrop-filter: blur(20px); /* Heavy blur for modern feel */
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Soft shine border */
+            box-shadow: 0 32px 64px -12px rgba(0,0,0,0.3); /* Premium soft shadow */
+        }
+        
+        .dark .modern-login-glass {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 32px 64px -12px rgba(0,0,0,0.6);
+        }
+
+        /* FIXED: Using direct source of your Unsplash Keyboard Image */
         .login-bg-overlay {
             background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
@@ -38,19 +58,24 @@
          class="fixed inset-0 z-[100] flex items-center justify-center px-6 transition-all duration-1000 login-bg-overlay"
          style="background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2070&auto=format&fit=crop');">
          
-         <div class="absolute inset-0 bg-slate-900/50 dark:bg-black/80 pointer-events-none"></div>
+         <div class="absolute inset-0 bg-slate-900/40 dark:bg-black/80 pointer-events-none"></div>
 
-        <div class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-10 md:p-16 rounded-[3.5rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] max-w-lg w-full text-center relative fade-in z-10 border border-white/20">
-            <button id="login-theme-toggle" class="absolute top-8 right-8 p-3 rounded-2xl bg-slate-100/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400">
+        <div class="modern-login-glass p-10 md:p-16 rounded-[3.5rem] max-w-lg w-full text-center relative fade-in z-10">
+            
+            <button id="login-theme-toggle" class="absolute top-8 right-8 p-3 rounded-2xl bg-white/20 dark:bg-slate-800/50 text-white dark:text-slate-400 hover:scale-110 transition-transform">
                 <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
             </button>
-            <div class="w-20 h-20 bg-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
+
+            <div class="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                 <span class="text-3xl font-black text-white tracking-tighter">T/A</span>
             </div>
-            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Academic Portal</h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-10 text-lg font-medium">Elevate your academic tracking experience.</p>
-            <input type="text" id="name-input" placeholder="Full Name" class="w-full p-5 rounded-2xl border-2 border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-800/50 dark:text-white mb-6 focus:border-indigo-600 outline-none text-center font-bold text-xl transition-all">
-            <button id="enter-portal" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-2xl shadow-2xl transition-all active:scale-[0.96] text-lg">
+
+            <h2 class="text-3xl font-black text-white mb-3 tracking-tight">Academic Portal</h2>
+            <p class="text-indigo-100 dark:text-slate-400 mb-10 text-lg font-medium">Elevate your academic tracking experience.</p>
+            
+            <input type="text" id="name-input" placeholder="Full Name" class="w-full p-5 rounded-2xl border-2 border-white/10 dark:border-slate-800 bg-white/20 dark:bg-slate-800/50 text-white placeholder:text-white/60 mb-6 focus:border-indigo-600 outline-none text-center font-bold text-xl transition-all">
+            
+            <button id="enter-portal" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-2xl shadow-2xl shadow-indigo-500/30 transition-all active:scale-[0.96] text-lg">
                 Get Started
             </button>
         </div>
@@ -66,9 +91,9 @@
             <p id="display-name-mobile" class="text-2xl font-black text-slate-900 dark:text-white truncate">Student</p>
         </div>
         <div class="flex gap-4">
-            <div class="flex-1 bg-indigo-600 p-5 rounded-[2rem] text-white shadow-lg shadow-indigo-500/20">
-                <p class="text-[10px] font-bold uppercase opacity-70 mb-1">CGPA</p>
-                <p id="final-gpa-mobile" class="text-3xl font-black">0.00</p>
+            <div class="flex-1 bg-indigo-600 p-5 rounded-[2rem] text-white shadow-lg shadow-indigo-500/30">
+                <p class="text-[10px] font-bold uppercase opacity-70 mb-1 tracking-widest">CGPA</p>
+                <p id="final-gpa-mobile" class="text-3xl font-black tracking-tighter">0.00</p>
             </div>
             <div class="flex-1 glass-card p-5 rounded-[2rem] border border-slate-200 dark:border-slate-700">
                 <p class="text-[10px] font-bold uppercase text-slate-400 mb-1">Units</p>
@@ -87,7 +112,7 @@
             <div class="bg-indigo-600 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden"><p class="text-indigo-100 text-[10px] font-black uppercase mb-3 tracking-[0.2em]">Cumulative GPA</p><div class="flex items-baseline gap-2"><span id="final-gpa" class="text-7xl font-black tracking-tighter">0.00</span><span class="text-indigo-200 text-lg font-bold">/ 5.0</span></div></div>
             <div class="glass-card p-8 rounded-[2.5rem]"><p class="text-slate-400 text-[10px] font-black uppercase mb-2 tracking-[0.2em]">Credits</p><p id="total-units" class="text-3xl font-black text-slate-800 dark:text-white tracking-tighter">0 <span class="text-sm font-bold text-slate-400 ml-1">UNITS</span></p></div>
         </div>
-        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight text-lg">Refresh Analysis</button>
+        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight text-lg">Refresh Analysis</button>
     </aside>
 
     <main id="main-app" class="hidden flex-1 p-6 md:p-16 overflow-y-auto">
@@ -96,7 +121,7 @@
                 <div><h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Course Registry</h2><p class="text-slate-500 font-medium mt-2">Add modules below to generate your report.</p></div>
                 <button id="add-course" class="w-full sm:w-auto bg-white dark:bg-slate-800 text-indigo-600 font-black py-4 px-10 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm transition-all active:scale-95">+ Add Course</button>
             </div>
-            <div class="glass-card rounded-[2.5rem] shadow-sm overflow-hidden">
+            <div class="glass-card rounded-[2.5rem] shadow-sm overflow-hidden border border-slate-200 dark:border-slate-800">
                 <div class="overflow-x-auto no-scrollbar">
                     <table class="w-full text-left min-w-[500px]">
                         <thead class="bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800 text-[10px] uppercase font-black tracking-[0.2em] text-slate-400 text-center"><tr class="text-center"><th class="px-8 py-6 text-left">Module</th><th class="px-4 py-6">Units</th><th class="px-4 py-6">Grade</th><th class="px-8 py-6 w-20"></th></tr></thead>
