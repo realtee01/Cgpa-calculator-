@@ -26,7 +26,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* FIXED: Path matches your 'public' folder and '.JPG' uppercase extension */
+        /* Matches your folder 'public' and uppercase '.JPG' */
         .login-bg-overlay {
             background-image: url('public/login-bg.JPG');
             background-size: cover;
@@ -58,8 +58,8 @@
                 <span class="text-3xl font-black text-white tracking-tighter">T/A</span>
             </div>
 
-            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tight text-center">Academic Portal</h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-10 text-lg font-medium text-center">Elevate your academic tracking experience.</p>
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">Academic Portal</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-10 text-lg font-medium">Elevate your academic tracking experience.</p>
             
             <input type="text" id="name-input" placeholder="Full Name" class="w-full p-5 rounded-2xl border-2 border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-800/50 dark:text-white mb-6 focus:border-indigo-600 outline-none text-center font-bold text-xl transition-all">
             
@@ -71,23 +71,23 @@
 
     <header class="md:hidden glass-card border-b border-slate-200 dark:border-slate-800 p-6 sticky top-0 z-30 transition-all">
         <div class="flex justify-between items-center mb-6">
-            <span class="font-black text-indigo-600 text-xl tracking-tighter">T/A</span>
+            <span class="font-black text-indigo-600 text-xl tracking-tighter uppercase">T/A PORTAL</span>
             <button id="mobile-theme-toggle" class="p-2.5 rounded-xl bg-slate-100/50 dark:bg-slate-800/50">
                 <span class="dark:hidden text-lg">🌙</span><span class="hidden dark:block text-lg">☀️</span>
             </button>
         </div>
         <div class="mb-5">
             <p class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-[0.2em] mb-1">Authenticated Student</p>
-            <p id="display-name-mobile" class="text-2xl font-black text-slate-900 dark:text-white truncate">Student</p>
+            <p id="display-name-mobile" class="text-2xl font-black text-slate-900 dark:text-white">Student</p>
         </div>
         <div class="flex gap-4">
             <div class="flex-1 bg-indigo-600 p-5 rounded-[2rem] text-white shadow-lg shadow-indigo-500/30">
-                <p class="text-[10px] font-bold uppercase opacity-70 mb-1 tracking-widest">CGPA</p>
-                <p id="final-gpa-mobile" class="text-3xl font-black tracking-tighter">0.00</p>
+                <p class="text-[10px] font-bold uppercase opacity-70 mb-1">CGPA</p>
+                <p id="final-gpa-mobile" class="text-3xl font-black">0.00</p>
             </div>
             <div class="flex-1 glass-card p-5 rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-sm">
-                <p class="text-[10px] font-bold uppercase text-slate-400 mb-1 tracking-widest">Units</p>
-                <p id="total-units-mobile" class="text-3xl font-black tracking-tighter text-slate-800 dark:text-white">0</p>
+                <p class="text-[10px] font-bold uppercase text-slate-400 mb-1">Units</p>
+                <p id="total-units-mobile" class="text-3xl font-black text-slate-800 dark:text-white">0</p>
             </div>
         </div>
     </header>
@@ -102,11 +102,13 @@
                 <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
             </button>
         </div>
+
         <div class="flex-1 space-y-10">
             <div>
                 <p class="text-indigo-500 text-[10px] font-extrabold uppercase tracking-[0.3em] mb-2">Student Account</p>
-                <p id="display-name" class="text-3xl font-black text-slate-900 dark:text-white leading-none">Student</p>
+                <p id="display-name" class="text-3xl font-black text-slate-900 dark:text-white truncate leading-none">Student</p>
             </div>
+            
             <div class="bg-indigo-600 rounded-[3rem] p-10 text-white shadow-2xl shadow-indigo-500/40 relative overflow-hidden">
                 <p class="text-indigo-100 text-[10px] font-black uppercase mb-3 tracking-[0.2em]">Live Cumulative GPA</p>
                 <div class="flex items-baseline gap-2">
@@ -114,33 +116,37 @@
                     <span class="text-indigo-200 text-lg font-bold">/ 5.0</span>
                 </div>
             </div>
+
             <div class="glass-card p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-700 shadow-sm">
                 <p class="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase mb-2 tracking-[0.2em]">Credit Achievement</p>
                 <p id="total-units" class="text-3xl font-black text-slate-800 dark:text-white tracking-tighter">0 <span class="text-sm font-bold text-slate-400 ml-1">UNITS</span></p>
             </div>
         </div>
-        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight">
+
+        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight text-lg">
             Refresh Analysis
         </button>
     </aside>
 
     <main id="main-app" class="hidden flex-1 p-6 md:p-16 overflow-y-auto">
         <div class="max-w-4xl mx-auto fade-in">
+            
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-12">
                 <div>
-                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight text-left">Course Registry</h2>
-                    <p class="text-slate-500 font-medium mt-2 text-left">Add your semester modules below to generate your report.</p>
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Course Registry</h2>
+                    <p class="text-slate-500 font-medium mt-2">Add your semester modules below to generate your report.</p>
                 </div>
                 <button id="add-course" class="w-full sm:w-auto bg-white dark:bg-slate-800 hover:bg-slate-50 text-indigo-600 dark:text-indigo-400 font-black py-4 px-10 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm transition-all active:scale-95">
                     + Add Course
                 </button>
             </div>
-            <div class="glass-card rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-200 dark:border-slate-800 overflow-hidden">
+
+            <div class="glass-card rounded-[2.5rem] shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
                 <div class="overflow-x-auto no-scrollbar">
                     <table class="w-full text-left min-w-[500px]">
-                        <thead class="bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800 text-[10px] uppercase font-black tracking-[0.2em] text-slate-400 text-center">
-                            <tr>
-                                <th class="px-8 py-6 text-left">Course Module</th>
+                        <thead class="bg-slate-50/50 dark:bg-slate-800/30 border-b border-slate-200 dark:border-slate-800">
+                            <tr class="text-[10px] uppercase font-black tracking-[0.2em] text-slate-400">
+                                <th class="px-8 py-6">Course Module</th>
                                 <th class="px-4 py-6 text-center">Units</th>
                                 <th class="px-4 py-6 text-center">Grade</th>
                                 <th class="px-8 py-6 w-20 text-right">Action</th>
@@ -150,6 +156,7 @@
                     </table>
                 </div>
             </div>
+
             <button id="calculate-btn-mobile" class="md:hidden w-full bg-indigo-600 text-white font-black py-5 rounded-[2rem] shadow-2xl shadow-indigo-500/40 mt-10 active:scale-[0.98] tracking-tight">
                 Update Performance
             </button>
