@@ -18,9 +18,9 @@
         }
         .dark .glass-card { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.05); }
 
-        /* FIXED: This points to your image inside the 'public' folder */
+        /* FIXED: Using direct Unsplash Source Link */
         .login-bg-overlay {
-            background-image: url('public/login-bg.JPG');
+            background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -36,7 +36,7 @@
 
     <div id="welcome-screen" 
          class="fixed inset-0 z-[100] flex items-center justify-center px-6 transition-all duration-1000 login-bg-overlay"
-         style="background-image: url('public/login-bg.JPG');">
+         style="background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2070&auto=format&fit=crop');">
          
          <div class="absolute inset-0 bg-slate-900/50 dark:bg-black/80 pointer-events-none"></div>
 
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <header class="md:hidden glass-card border-b border-slate-200 dark:border-slate-800 p-6 sticky top-0 z-30">
+    <header class="md:hidden glass-card border-b border-slate-200 dark:border-slate-800 p-6 sticky top-0 z-30 transition-all">
         <div class="flex justify-between items-center mb-6">
             <span class="font-black text-indigo-600 text-xl tracking-tighter uppercase">T/A</span>
             <button id="mobile-theme-toggle" class="p-2.5 rounded-xl bg-slate-100/50 dark:bg-slate-800/50 text-slate-500"><span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span></button>
@@ -94,7 +94,7 @@
         <div class="max-w-4xl mx-auto fade-in">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 text-left">
                 <div><h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Course Registry</h2><p class="text-slate-500 font-medium mt-2">Add modules below to generate your report.</p></div>
-                <button id="add-course" class="w-full sm:w-auto bg-white dark:bg-slate-800 text-indigo-600 font-black py-4 px-10 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm">+ Add Course</button>
+                <button id="add-course" class="w-full sm:w-auto bg-white dark:bg-slate-800 text-indigo-600 font-black py-4 px-10 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm transition-all active:scale-95">+ Add Course</button>
             </div>
             <div class="glass-card rounded-[2.5rem] shadow-sm overflow-hidden">
                 <div class="overflow-x-auto no-scrollbar">
