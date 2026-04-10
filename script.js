@@ -54,21 +54,29 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < 4; i++) createRow();
     addBtn.addEventListener('click', createRow);
 
+    // FIX: Optimized calculation function that listens for both buttons
     const updatePerformance = () => {
         const units = document.querySelectorAll('.unit-input');
         const grades = document.querySelectorAll('.grade-input');
         let totalU = 0, totalP = 0;
+
         units.forEach((input, i) => {
             const u = parseFloat(input.value) || 0;
             const g = parseFloat(grades[i].value) || 0;
             totalU += u; totalP += (u * g);
         });
+
         const gpa = totalU > 0 ? (totalP / totalU).toFixed(2) : "0.00";
+        
+        // Update both the mobile header labels and the desktop sidebar labels
         document.querySelectorAll('#final-gpa, #final-gpa-mobile').forEach(el => el.innerText = gpa);
         document.querySelectorAll('#total-units, #total-units-mobile').forEach(el => el.innerText = totalU);
     };
 
-    [document.getElementById('calculate-btn-desktop'), document.getElementById('calculate-btn-mobile')].forEach(btn => {
-        if (btn) btn.addEventListener('click', updatePerformance);
-    });
+    // Attach listeners to both IDs (Mobile and Desktop)
+    const btnDesktop = document.getElementById('calculate-btn-desktop');
+    const btnMobile = document.getElementById('calculate-btn-mobile');
+
+    if(btnDesktop) btnDesktop.addEventListener('click', updatePerformance);
+    if(btnMobile) btnMobile.addEventListener('click', updatePerformance);
 });
