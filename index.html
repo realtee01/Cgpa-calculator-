@@ -11,7 +11,6 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; background: #f8fafc; }
         .dark body { background: #020617; }
         
-        /* Glassmorphism for Dashboard Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(14px);
@@ -23,13 +22,12 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* NEW PREMIUM GLASSMORPHISM FOR LOGIN CARD */
         .modern-login-glass {
-            background: rgba(255, 255, 255, 0.2); /* Low opacity for transparency */
-            backdrop-filter: blur(20px); /* Heavy blur for modern feel */
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Soft shine border */
-            box-shadow: 0 32px 64px -12px rgba(0,0,0,0.3); /* Premium soft shadow */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 32px 64px -12px rgba(0,0,0,0.3);
         }
         
         .dark .modern-login-glass {
@@ -38,7 +36,6 @@
             box-shadow: 0 32px 64px -12px rgba(0,0,0,0.6);
         }
 
-        /* FIXED: Using direct source of your Unsplash Keyboard Image */
         .login-bg-overlay {
             background-image: url('https://plus.unsplash.com/premium_photo-1678567672060-fb4eb9e6a004?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-size: cover;
@@ -61,20 +58,15 @@
          <div class="absolute inset-0 bg-slate-900/40 dark:bg-black/80 pointer-events-none"></div>
 
         <div class="modern-login-glass p-10 md:p-16 rounded-[3.5rem] max-w-lg w-full text-center relative fade-in z-10">
-            
             <button id="login-theme-toggle" class="absolute top-8 right-8 p-3 rounded-2xl bg-white/20 dark:bg-slate-800/50 text-white dark:text-slate-400 hover:scale-110 transition-transform">
                 <span class="dark:hidden">🌙</span><span class="hidden dark:block">☀️</span>
             </button>
-
             <div class="w-20 h-20 bg-white/20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-xl">
                 <span class="text-3xl font-black text-white tracking-tighter">T/A</span>
             </div>
-
             <h2 class="text-3xl font-black text-white mb-3 tracking-tight">Academic Portal</h2>
             <p class="text-indigo-100 dark:text-slate-400 mb-10 text-lg font-medium">Elevate your academic tracking experience.</p>
-            
             <input type="text" id="name-input" placeholder="Full Name" class="w-full p-5 rounded-2xl border-2 border-white/10 dark:border-slate-800 bg-white/20 dark:bg-slate-800/50 text-white placeholder:text-white/60 mb-6 focus:border-indigo-600 outline-none text-center font-bold text-xl transition-all">
-            
             <button id="enter-portal" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-2xl shadow-2xl shadow-indigo-500/30 transition-all active:scale-[0.96] text-lg">
                 Get Started
             </button>
@@ -112,7 +104,7 @@
             <div class="bg-indigo-600 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden"><p class="text-indigo-100 text-[10px] font-black uppercase mb-3 tracking-[0.2em]">Cumulative GPA</p><div class="flex items-baseline gap-2"><span id="final-gpa" class="text-7xl font-black tracking-tighter">0.00</span><span class="text-indigo-200 text-lg font-bold">/ 5.0</span></div></div>
             <div class="glass-card p-8 rounded-[2.5rem]"><p class="text-slate-400 text-[10px] font-black uppercase mb-2 tracking-[0.2em]">Credits</p><p id="total-units" class="text-3xl font-black text-slate-800 dark:text-white tracking-tighter">0 <span class="text-sm font-bold text-slate-400 ml-1">UNITS</span></p></div>
         </div>
-        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight text-lg">Refresh Analysis</button>
+        <button id="calculate-btn-desktop" class="mt-8 w-full bg-slate-900 dark:bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-5 rounded-[2rem] shadow-xl transition-all active:scale-[0.97] tracking-tight text-lg">Update Performance</button>
     </aside>
 
     <main id="main-app" class="hidden flex-1 p-6 md:p-16 overflow-y-auto">
